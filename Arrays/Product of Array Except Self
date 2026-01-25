@@ -1,8 +1,5 @@
 """
 Problem: Product of Array Except Self
-Approach: Prefix & Suffix Product
-Time Complexity: O(n)
-Space Complexity: O(1) (excluding output)
 """
 
 def productExceptSelf(nums):
