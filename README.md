@@ -4,7 +4,7 @@ This repository contains well-structured and optimized solutions to
 Data Structures & Algorithms problems, implemented in Python.
 
 ## 🧠 What’s Inside
--Problem Statement
+- Problem Statement
 - Clean and readable code
 - Optimized approaches
 
