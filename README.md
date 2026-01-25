@@ -6,9 +6,6 @@ Data Structures & Algorithms problems, implemented in Python.
 ## 🧠 What’s Inside
 - Clean and readable code
 - Optimized approaches
-- Time & space complexity analysis
-- Common interview patterns
-
 ## 📂 Topics Covered
 - Arrays, Strings, Linked List
 - Stack, Queue, Hashing
