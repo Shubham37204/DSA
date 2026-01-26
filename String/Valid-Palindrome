@@ -1,0 +1,40 @@
+"""
+Problem: Valid Palindrome
+
+Statement:
+Given a string s, return true if it is a palindrome, or false otherwise.
+
+A palindrome is a string that reads the same forward and backward after:
+- converting all uppercase letters into lowercase letters
+- removing all non-alphanumeric characters
+
+You may assume the string contains printable ASCII characters.
+"""
+
+class Solution:
+    def isAlpha(self, u: str) -> bool:
+        # Check if character is alphanumeric
+        return ('0' <= u.lower() <= '9') or ('a' <= u.lower() <= 'z')
+
+    def isPalindrome(self, s: str) -> bool:
+        start, end = 0, len(s) - 1
+        
+        while start < end:
+            # Skip non-alphanumeric characters from the left
+            if not self.isAlpha(s[start]):
+                start += 1
+                continue
+            
+            # Skip non-alphanumeric characters from the right
+            if not self.isAlpha(s[end]):
+                end -= 1
+                continue
+            
+            # Compare characters (case-insensitive)
+            if s[start].lower() != s[end].lower():
+                return False
+            
+            start += 1
+            end -= 1
+        
+        return True
