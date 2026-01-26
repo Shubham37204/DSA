@@ -1,0 +1,29 @@
+"""
+Problem: Container With Most Water
+
+Statement:
+You are given an integer array height where height[i] represents the height of a vertical
+line at position i.
+Choose two lines that together with the x-axis form a container, such that the container
+contains the most water.
+Return the maximum amount of water a container can store.
+"""
+
+class Solution(object):
+    def maxArea(self, arr):
+        st = 0
+        end = len(arr) - 1
+        maxWater = 0
+
+        while st < end:
+            ht = min(arr[st], arr[end])
+            width = end - st
+            currArea = ht * width
+            maxWater = max(maxWater, currArea)
+
+            if arr[st] < arr[end]:
+                st += 1
+            else:
+                end -= 1
+
+        return maxWater
