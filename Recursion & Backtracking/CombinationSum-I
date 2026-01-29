@@ -11,6 +11,8 @@ Given an array of distinct integers nums and a target integer target, return a l
 
 You may return the combinations in any order.
 """
+class Solution:
+    def combinationSum(self, candidates, target):
         ans = []
         combin = []
 
@@ -29,3 +31,4 @@ You may return the combinations in any order.
 
         combSum(candidates, 0, combin, ans, target)
         return ans
+
