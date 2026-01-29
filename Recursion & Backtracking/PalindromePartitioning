@@ -1,0 +1,36 @@
+"""
+Problem: Palindrome Partitioning
+
+Statement:
+Given a string s, partition s such that every substring of the partition is a palindrome.
+
+- A palindrome is a string that reads the same forward and backward.
+- Each partition must cover the entire string without overlap.
+- Return all possible palindrome partitionings of the string.
+- The order of substrings in a partition matters.
+
+You may return the partitions in any order.
+"""
+class Solution:
+    def partition(self, s):
+        ans= []
+        partition = []
+
+        def palin(s):
+            return s ==s[::-1]
+
+        def getallpartition(s,partiton,ans):
+            if len(s)==0:
+                ans.append(partition.copy())
+                return
+            
+            for i in range(len(s)):
+                part = s[:i+1]
+                if(palin(part)):
+                    partition.append(part)
+                    getallpartition(s[i+1:], partition, ans)
+                    partition.pop()
+                   
+        getallpartition(s,partition,ans)
+        return ans
+        
