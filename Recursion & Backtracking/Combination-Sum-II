@@ -1,0 +1,43 @@
+"""
+Problem: Combination Sum II
+
+Statement:
+Given a collection of candidate numbers candidates and a target integer target, return a list of all unique combinations where the chosen numbers sum to target.
+
+- Each number in candidates may be used at most once in a combination.
+- The solution set must not contain duplicate combinations.
+- Two combinations are considered different if the frequency of at least one chosen number is different.
+- The order of numbers in a combination does not matter.
+
+You may return the combinations in any order.
+"""
+class Solution:
+    def combinationSum2(self, candidates, target):
+        candidates.sort()   # important for skipping duplicates
+        ans = []
+        combin = []
+
+        def combSum(arr, i, combin, ans, tar):
+            if tar == 0:
+                ans.append(combin.copy())
+                return
+
+            if i == len(arr) or tar < 0:
+                return
+
+            # pick (ONLY ONCE → move to i+1)
+            combin.append(arr[i])
+            combSum(arr, i + 1, combin, ans, tar - arr[i])
+
+            # backtrack
+            combin.pop()
+
+            # skip duplicates before not-pick
+            while i + 1 < len(arr) and arr[i] == arr[i + 1]:
+                i += 1
+
+            # not pick
+            combSum(arr, i + 1, combin, ans, tar)
+
+        combSum(candidates, 0, combin, ans, target)
+        return ans
