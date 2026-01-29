@@ -1,0 +1,31 @@
+"""
+Problem: Combination Sum
+
+Statement:
+Given an array of distinct integers nums and a target integer target, return a list of all unique combinations of nums where the chosen numbers sum to target.
+
+- Each number in nums may be chosen an unlimited number of times.
+- A combination is valid if the sum of its elements equals target.
+- Two combinations are considered different if the frequency of at least one number is different.
+- The order of numbers in a combination does not matter.
+
+You may return the combinations in any order.
+"""
+        ans = []
+        combin = []
+
+        def combSum(arr, i, combin, ans, tar):
+            if tar == 0:
+                ans.append(combin.copy())
+                return
+
+            if i == len(arr) or tar < 0:
+                return
+
+            combin.append(arr[i])
+            combSum(arr, i, combin, ans, tar - arr[i])
+            combin.pop()
+            combSum(arr, i + 1, combin, ans, tar)
+
+        combSum(candidates, 0, combin, ans, target)
+        return ans
