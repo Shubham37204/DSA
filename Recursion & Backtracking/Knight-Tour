@@ -1,0 +1,37 @@
+"""
+Problem: Check Knight Tour Configuration
+
+Statement:
+You are given an n × n chessboard represented as an integer matrix grid, where each cell contains a unique value from 0 to n² − 1.
+
+- The value grid[row][col] indicates the order in which a knight visited that cell.
+- The knight must start from the top-left cell (0, 0), which should contain the value 0.
+- Each cell on the board must be visited exactly once.
+- A valid knight move consists of moving:
+  - two squares vertically and one square horizontally, or
+  - two squares horizontally and one square vertically.
+- Moves are 0-indexed.
+
+Return true if the given grid represents a valid knight’s tour configuration, otherwise return false.
+"""
+class Solution:
+    def checkValidGrid(self, grid: List[List[int]]) -> bool:
+        n=len(grid)
+
+        def isValid(grid,row,col,n,expectedValue):
+            if row < 0 or col < 0 or row>=n or col>=n or grid[row][col] != expectedValue:
+                return False
+            if  grid[row][col] == n*n-1:
+                return True
+            
+            ans1 = isValid(grid, row + 2, col + 1, n, expectedValue + 1)
+            ans2 = isValid(grid, row + 1, col + 2, n, expectedValue + 1)
+            ans3 = isValid(grid, row - 1, col + 2, n, expectedValue + 1)
+            ans4 = isValid(grid, row - 2, col + 1, n, expectedValue + 1)
+            ans5 = isValid(grid, row - 2, col - 1, n, expectedValue + 1)
+            ans6 = isValid(grid, row - 1, col - 2, n, expectedValue + 1)
+            ans7 = isValid(grid, row + 1, col - 2, n, expectedValue + 1)
+            ans8 = isValid(grid, row + 2, col - 1, n, expectedValue + 1)
+
+            return ans1 or ans2 or ans3 or ans4 or ans5 or ans6 or ans7 or ans8
+        return isValid(grid,0,0,n,0)
