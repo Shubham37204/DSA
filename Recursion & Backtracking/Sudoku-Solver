@@ -1,0 +1,15 @@
+"""
+Problem: Sudoku Solver
+
+Statement:
+Given a partially filled 9×9 Sudoku board, solve the puzzle by filling the empty cells.
+
+- The board consists of digits '1' to '9' and the character '.' representing empty cells.
+- Each digit from 1 to 9 must appear exactly once in every row.
+- Each digit from 1 to 9 must appear exactly once in every column.
+- Each digit from 1 to 9 must appear exactly once in each 3×3 sub-grid.
+- The solution must be done in-place without returning a new board.
+- You may assume that the given Sudoku puzzle has a valid and unique solution.
+
+Fill the board so that it represents a valid completed Sudoku.
+"""
