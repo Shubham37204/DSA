@@ -11,3 +11,29 @@ Given an integer array nums that may contain duplicate elements, return all poss
 
 Return all possible unique subsets.
 """
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        ans = []
+        allSubsets = []
+
+        def Subsets(arr, ans, i):
+            if i == len(arr):
+                allSubsets.append(ans.copy())
+                return
+            
+            # include current element
+            ans.append(arr[i])
+            Subsets(arr, ans, i + 1)
+            ans.pop()
+
+            # skip duplicates
+            idx = i + 1
+            while idx < len(arr) and arr[idx] == arr[i]:
+                idx += 1
+
+            # exclude current element and its duplicates
+            Subsets(arr, ans, idx)
+
+        Subsets(nums, ans, 0)
+        return allSubsets
