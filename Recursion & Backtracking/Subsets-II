@@ -1,0 +1,13 @@
+"""
+Problem: Subsets II
+
+Statement:
+Given an integer array nums that may contain duplicate elements, return all possible subsets (the power set).
+
+- A subset is a selection of elements from the array (possibly empty).
+- The solution set must not contain duplicate subsets.
+- Subsets may be returned in any order.
+- The input array may contain duplicates, but each subset in the output must be unique.
+
+Return all possible unique subsets.
+"""
