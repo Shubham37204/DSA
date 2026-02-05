@@ -1,0 +1,29 @@
+"""
+Problem: Permutations
+
+Statement:
+Given an array nums of unique integers, return all possible permutations of nums.
+
+- A permutation is a rearrangement of elements in which the order matters.
+- Each element in nums must appear exactly once in every permutation.
+- All permutations should be unique.
+- The order of permutations in the output does not matter.
+
+You may return the answer in any order.
+"""
+class Solution:
+    def permute(self, nums):
+        ans = []
+
+        def getPerms(nums, idx):
+            if idx == len(nums):
+                ans.append(nums.copy())
+                return
+
+            for i in range(idx, len(nums)):
+                nums[idx], nums[i] = nums[i], nums[idx]
+                getPerms(nums, idx + 1)
+                nums[idx], nums[i] = nums[i], nums[idx]
+
+        getPerms(nums, 0)
+        return ans

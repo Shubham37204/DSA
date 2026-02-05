@@ -1,0 +1,26 @@
+"""
+Problem: Subsets
+
+Statement:
+Given an array nums of unique integers, return all possible subsets of nums.
+
+- A subset is a selection of elements from the array (possibly empty).
+- Each element can either be included or excluded.
+- Since all elements are unique, the solution set will not contain duplicate subsets.
+- The order of subsets in the output does not matter.
+
+Return all possible subsets.
+"""
+class Solution:
+    def subsets(self, nums):
+        Subset = []
+        def subset(arr,ans,i):
+            if i==len(arr):
+                Subset.append(ans.copy())
+                return
+            ans.append(arr[i])
+            subset(arr,ans,i+1)
+            ans.pop()
+            subset(arr,ans,i+1)
+        subset(nums,[],0)
+        return Subset

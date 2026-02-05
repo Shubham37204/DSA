@@ -1,0 +1,29 @@
+"""
+Problem: Pow(x, n)
+
+Statement:
+Implement pow(x, n), which calculates x raised to the power n (xⁿ).
+
+Constraints:
+- x is a floating-point number
+- n is an integer (can be negative)
+- Do not use built-in power functions
+"""
+
+class Solution(object):
+    def myPow(self, x, n):
+        """
+        :type x: float
+        :type n: int
+        :rtype: float
+        """
+        if n < 0:
+            x = 1 / x
+            n = -n
+        res = 1
+        while n > 0:
+            if n % 2 == 1:
+                res *= x
+            x *= x
+            n //= 2
+        return res

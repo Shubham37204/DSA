@@ -1,0 +1,34 @@
+"""
+Problem: Find Missing and Repeated Values
+
+Statement:
+You are given a 2D grid of size n × n containing numbers from 1 to n².
+Each number appears exactly once except:
+- One number appears twice (repeated)
+- One number is missing
+
+Return an array [a, b] where:
+- a is the repeated number
+- b is the missing number
+"""
+
+class Solution:
+    def findMissingAndRepeatedValues(self, grid):
+        my_set = set()
+        n = len(grid)
+        a, b = 0, 0
+        actual_sum = 0
+
+        for i in range(n):
+            for j in range(n):
+                val = grid[i][j]
+                actual_sum += val
+                if val in my_set:
+                    a = val
+                else:
+                    my_set.add(val)
+
+        exp_sum = (n * n) * (n * n + 1) // 2
+        b = exp_sum + a - actual_sum
+
+        return [a, b]

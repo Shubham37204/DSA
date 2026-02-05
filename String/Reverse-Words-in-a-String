@@ -1,0 +1,41 @@
+"""
+Problem: Reverse Words in a String
+
+Statement:
+Given an input string s, reverse the order of the words.
+
+A word is defined as a sequence of non-space characters.
+The returned string should have:
+- words in reverse order
+- a single space separating the words
+- no leading or trailing spaces
+"""
+class Solution(object):
+    def reverseWords(self, s):
+        return " ".join(s.strip().split()[::-1])
+
+
+class Solution:
+    def reverseWords(self, s):
+        n = len(s)
+        result = ""
+
+        # Reverse the entire string
+        s = s[::-1]
+
+        i = 0
+        while i < n:
+            word = ""
+
+            # Build the word character by character
+            while i < n and s[i] != ' ':
+                word += s[i]
+                i += 1
+
+            # Reverse the word and add to result
+            if len(word) > 0:
+                result += " " + word[::-1]
+
+            i += 1  # Skip spaces
+
+        return result[1:]  # Remove leading space

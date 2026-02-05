@@ -1,0 +1,22 @@
+"""
+Problem: Remove All Occurrences of a Substring
+
+Statement:
+Given two strings s and part, remove all occurrences of part from s
+until no occurrence exists.
+
+Return the final string after all removals.
+"""
+class Solution(object):
+    def removeOccurrences(self, s, part):
+        while len(s) > 0 and s.find(part) != -1:
+            idx = s.find(part)
+            s = s[:idx] + s[idx + len(part):]
+        return s
+
+
+class Solution:
+    def removeOccurrences(self, s: str, part: str) -> str:
+        while part in s:
+            s = s.replace(part, "", 1)  # remove leftmost occurrence
+        return s
