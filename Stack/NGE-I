@@ -1,0 +1,46 @@
+"""
+Problem: Next Greater Element I
+
+Statement:
+Given two integer arrays nums1 and nums2, where nums1 is a subset of nums2,
+find the next greater element for each element in nums1.
+
+- The next greater element of a number x in nums2 is the first greater number
+  to the right of x in nums2.
+- If no such element exists, return -1 for that number.
+- The order of elements in nums1 must be preserved in the output.
+
+Approach:
+We traverse nums2 from right to left using a monotonic decreasing stack to
+efficiently compute the next greater element for every value in nums2.
+These results are stored in a hash map for fast lookup.
+Finally, we build the answer for nums1 using this map.
+
+Return an array containing the next greater elements corresponding to nums1.
+"""
+class Solution:
+    def nextGreaterElement(self, nums1, nums2):
+
+        nge = {}     
+        s = []        # stack
+        n = len(nums2)
+
+        # step 1: build next-greater map for nums2
+        for i in range(n - 1, -1, -1):   # right → left
+
+            while len(s) > 0 and s[-1] <= nums2[i]:
+                s.pop()
+
+            if len(s) == 0:
+                nge[nums2[i]] = -1     
+            else:
+                nge[nums2[i]] = s[-1]
+
+            s.append(nums2[i])
+
+        # step 2: answer nums1 using the map
+        ans = []
+        for num in nums1:
+            ans.append(nge[num])
+
+        return ans
