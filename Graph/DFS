@@ -1,0 +1,30 @@
+"""
+Problem: Depth-First Search (DFS) Traversal of a Graph
+
+Statement:
+Given a graph with V vertices represented using an adjacency list, perform
+a Depth-First Search (DFS) traversal starting from vertex 0.
+
+- DFS explores as far as possible along each branch before backtracking.
+- It visits a vertex, then recursively explores its neighbors.
+- A visited array is used to ensure that each vertex is processed only once.
+- DFS is typically implemented using recursion or a stack.
+
+The goal is to return the order of vertices visited during the DFS traversal.
+"""
+
+class Solution:
+    def dfsOfGraph(self, V, adj):
+        visited = [False] * V
+        result = []
+
+        def dfs(u):
+            visited[u] = True
+            result.append(u)
+
+            for v in adj[u]:
+                if not visited[v]:
+                    dfs(v)
+
+        dfs(0)
+        return result
