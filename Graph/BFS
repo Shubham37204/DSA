@@ -1,0 +1,34 @@
+"""
+Problem: Breadth-First Search (BFS) Traversal of a Graph
+
+Statement:
+Given a graph with V vertices represented using an adjacency list, perform
+a Breadth-First Search (BFS) traversal starting from vertex 0.
+
+- BFS explores the graph level by level.
+- It visits all the neighbors of a vertex before moving to the next level.
+- A queue is used to keep track of vertices to be explored.
+- Each vertex is visited exactly once using a visited array.
+
+The goal is to return the order of vertices visited during the BFS traversal.
+"""
+
+class Solution:
+    def bfsOfGraph(self, V, adj):
+        visited = [False] * V
+        queue = []
+        result = []
+
+        queue.append(0)
+        visited[0] = True
+
+        while queue:
+            node = queue.pop(0)
+            result.append(node)
+
+            for neighbor in adj[node]:
+                if not visited[neighbor]:
+                    visited[neighbor] = True
+                    queue.append(neighbor)
+
+        return result
