@@ -1,0 +1,45 @@
+"""
+Problem: Number of Islands
+
+Statement:
+Given a 2D grid of size n × m consisting of characters '1' (land) and '0' (water),
+determine the number of islands present in the grid.
+
+- An island is formed by connecting adjacent lands horizontally or vertically.
+- Diagonal connections are not considered.
+- The grid boundaries are surrounded by water.
+- Each island must be counted only once.
+
+To solve the problem, we traverse the grid and whenever an unvisited land cell ('1')
+is found, we perform a Depth-First Search (DFS) to mark all connected land cells
+as visited.
+
+The goal is to return the total number of distinct islands present in the grid.
+"""
+
+class Solution:
+    def numIslands(self, grid):
+
+        def dfs(i,j,visited,grid,n,m):
+            if i < 0 or j<0 or i>=n or j>=m or visited[i][j] or grid[i][j] != '1':
+                return
+
+            visited[i][j] = True
+            dfs(i-1,j,visited,grid,n,m)
+            dfs(i,j+1,visited,grid,n,m)
+            dfs(i+1,j,visited,grid,n,m)
+            dfs(i,j-1,visited,grid,n,m)
+
+    
+        isLands = 0
+        n = len(grid)
+        m = len(grid[0])
+        
+        visited = [[False ]*m for _ in range(n)]
+
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == '1' and not visited[i][j]:
+                    dfs(i,j,visited,grid,n,m)
+                    isLands+=1
+        return isLands
