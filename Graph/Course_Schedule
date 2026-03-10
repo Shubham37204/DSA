@@ -1,0 +1,54 @@
+"""
+Problem: Course Schedule
+
+Statement:
+You are given an integer numCourses representing the total number of courses
+labeled from 0 to numCourses - 1, and a list of prerequisite pairs.
+
+Each prerequisite pair [a, b] indicates that to take course 'a', you must
+first complete course 'b'.
+
+- The courses and their prerequisites form a directed graph.
+- An edge b → a means course 'b' must be completed before course 'a'.
+- If there exists a cycle in this graph, it is impossible to finish all courses
+  because the courses depend on each other in a loop.
+
+To solve this problem, we perform a Depth-First Search (DFS) to detect cycles
+in the directed graph using a recursion path (recPath).
+
+The goal is to determine whether it is possible to complete all courses.
+Return True if all courses can be finished, otherwise return False.
+"""
+
+class Solution:
+    def canFinish(self, n, edge):
+
+        def isCycleDfs(src, vis, recPath, edge):
+            vis[src] = True
+            recPath[src] = True
+
+            for i in range(len(edge)):
+                v = edge[i][0]
+                u = edge[i][1]
+
+                if u == src:
+
+                    if not vis[v]:
+                        if isCycleDfs(v, vis, recPath, edge):
+                            return True
+
+                    elif recPath[v]:
+                        return True
+
+            recPath[src] = False
+            return False
+
+        vis = [False] * n
+        recPath = [False] * n
+
+        for i in range(n):
+            if not vis[i]:
+                if isCycleDfs(i, vis, recPath, edge):
+                    return False
+
+        return True
