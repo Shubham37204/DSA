@@ -1,0 +1,67 @@
+"""
+Problem: Rotting Oranges
+
+Statement:
+You are given a 2D grid where each cell can have one of the following values:
+
+- 0 representing an empty cell
+- 1 representing a fresh orange
+- 2 representing a rotten orange
+
+Every minute, any fresh orange that is horizontally or vertically adjacent
+to a rotten orange becomes rotten.
+
+- The rotting process spreads to neighboring cells level by level.
+- Multiple rotten oranges can infect fresh oranges simultaneously.
+- If some fresh oranges cannot be reached by any rotten orange, they will
+  remain fresh forever.
+
+To solve this problem, we perform a Breadth-First Search (BFS) starting from
+all initially rotten oranges and simulate the spread of rot minute by minute.
+
+The goal is to return the minimum number of minutes required for all oranges
+to become rotten. If it is impossible for all oranges to rot, return -1.
+"""
+
+class Solution:
+    def orangesRotting(self, grid):
+
+        n = len(grid)
+        m = len(grid[0])
+
+        queue=[]
+        visited= [[False]*m for _ in range(n)]
+
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == 2:
+                    queue.append(((i,j),0))
+                    visited[i][j]=True
+        
+        ans = 0
+        while len(queue)>0:
+            (i,j),time = queue.pop(0)
+            ans = max(ans,time)
+
+            if i-1>=0 and not visited[i-1][j] and grid[i-1][j] == 1:
+                queue.append(((i-1,j),time+1))
+                visited[i-1][j]=True
+
+            if j+1<m and not visited[i][j+1] and grid[i][j+1] == 1:
+                queue.append(((i,j+1),time+1))
+                visited[i][j+1]=True
+
+            if i+1<n and not visited[i+1][j] and grid[i+1][j] == 1:
+                queue.append(((i+1,j),time+1))
+                visited[i+1][j]=True
+
+            if j-1>=0 and not visited[i][j-1] and grid[i][j-1] == 1:
+                queue.append(((i,j-1),time+1))
+                visited[i][j-1]=True
+
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == 1 and not visited[i][j]:
+                    return -1
+
+        return ans
